@@ -6,12 +6,10 @@ export default function Header() {
     const location = useLocation();
     const pathMatchRouter = (route) => {
         if (route === location.pathname) {
-
             return true;
         }
     }
     return (
-
         <div className="border-b bg-white shadow-md sticky top-0">
             <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
                 <div>
