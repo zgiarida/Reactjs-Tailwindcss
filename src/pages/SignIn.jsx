@@ -1,6 +1,7 @@
 import { useState } from "react"
 import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs"
 import { Link } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
@@ -49,8 +50,12 @@ export default function SignIn() {
                                 <Link to="/forgot-password" className="text-red-400 hover:text-red-600 transition duration-200 ease-in-out italic">Forgot Password ?</Link>
                             </p>
                         </div>
+                    <button type="submit" className="w-full mt-4 bg-blue-900 rounded h-9 text-white hover:bg-blue-600 shadow-md transition duration-200 ease-in-out font-medium text-sm">SIGN IN</button>
+                    <div className="flex items-center before:flex-1 before:border-t-2 before:border-gray-300 after:flex-1 after:border-gray-300 after:border-t-2 my-1">
+                        <p className="text-center font-semibold mx-1">OR</p>
+                    </div>
+                    <OAuth />
                     </form>
-                    <button type="submit" className="w-full my-6 bg-blue-900 rounded h-9 text-white hover:bg-blue-600 shadow-md transition duration-200 ease-in-out">SIGN IN</button>
                 </div>
             </div>
         </section>
