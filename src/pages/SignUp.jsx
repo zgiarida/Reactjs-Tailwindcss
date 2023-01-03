@@ -1,7 +1,10 @@
-import { useState } from "react"
-import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs"
+import { useState } from "react";
+import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs";
 import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { db } from "../firebase";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 export default function SignUp() {
     const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +21,25 @@ export default function SignUp() {
         }))
     }
 
+    async function onSubmit(e){
+        e.preventDefault()
+        try {
+            const auth = getAuth();
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            updateProfile(auth.currentUser, {
+                displayName: name
+            })
+            const user = userCredential.user;
+            const formDataCopy = {...formData}
+            delete formDataCopy.password;
+            formDataCopy.timestamp = serverTimestamp();
+            await setDoc(doc(db, "users", user.uid), formDataCopy);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     return (
 
         <section>
@@ -27,7 +49,7 @@ export default function SignUp() {
                     <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="cake" className="w-full rounded-2xl" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-8 sm:w-[78%]">
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <input className="w-full py-2 px-4 text-xl text-gray-800 rounded-md border-gray-300 transition ease-in-out my-4" 
                         type="text" id="name" 
                         value={name}
