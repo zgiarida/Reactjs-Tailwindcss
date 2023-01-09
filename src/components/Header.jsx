@@ -13,7 +13,7 @@ export default function Header() {
         <div className="border-b bg-white shadow-md sticky top-0">
             <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
                 <div>
-                     <img src="https://img.icons8.com/dusk/512/warface-logo.png" alt="logo-banner" className="h-9 cursor-pointer" onClick={() => navigate("/")}/>   
+                     <img src="https://img.freepik.com/free-vector/happy-cute-girl-chef-cooking-bakery-banner-logo-cartoon-art-illustration_56104-784.jpg?w=740&t=st=1673088312~exp=1673088912~hmac=7ce3caa884dcd8334e29fe9eec2c2e137892c79313075d0e4e05efb34025b6e4" alt="logo-banner" className="h-12 cursor-pointer" onClick={() => navigate("/")}/>   
                 </div>
                 <div>
                     <ul className="flex space-x-7">

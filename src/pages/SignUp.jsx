@@ -50,7 +50,7 @@ export default function SignUp() {
             <h1 className="text-center pt-4 text-2xl font-bold">Sign Up</h1>
             <div className="flex justify-center items-center flex-wrap mb-12 px-6 py-12 max-w-6xl mx-auto ">
                 <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6 ">
-                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="cake" className="w-full rounded-2xl" />
+                    <img src="https://images.unsplash.com/photo-1552689486-f6773047d19f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="cake2" className="rounded-sm w-full" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-8 sm:w-[78%]">
                     <form onSubmit={onSubmit}>

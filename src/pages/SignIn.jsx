@@ -23,7 +23,7 @@ export default function SignIn() {
             <h1 className="text-center pt-4 text-2xl font-bold">Sign In</h1>
             <div className="flex justify-center items-center flex-wrap mb-12 px-6 py-12 max-w-6xl mx-auto ">
                 <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6 ">
-                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="cake" className="w-full rounded-2xl" />
+                    <img src="https://images.unsplash.com/photo-1607478900766-efe13248b125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="cake" className="w-full rounded-2xl" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-8 sm:w-[78%]">
                     <form>
