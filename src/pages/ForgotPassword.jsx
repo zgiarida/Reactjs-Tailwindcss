@@ -1,11 +1,26 @@
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import OAuth from "../components/OAuth";
 
 export default function ForgotPassword() {
         const [email, setEmail] = useState("");
+        const navigate = useNavigate();
     const onChange = (e) => {
         setEmail(e.target.value);
+    };
+    const sendResetEmail = async(e) => {
+        e.preventDefault();
+        try {
+            const auth = getAuth();
+           await sendPasswordResetEmail(auth, email);
+            toast.success("Succes for reset password")
+            navigate("/sign-in")
+        } catch (error) {
+            toast.error("cloud not send reset email password")
+            
+        }
     }
 
     return (
@@ -17,7 +32,7 @@ export default function ForgotPassword() {
                     <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="cake" className="w-full rounded-2xl" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-8 sm:w-[78%]">
-                    <form>
+                    <form onSubmit={sendResetEmail}>
                         <input className="w-full py-2 px-4 text-xl text-gray-800 rounded-md border-gray-300 transition ease-in-out my-5" 
                         type="email" id="email" 
                         value={email} 

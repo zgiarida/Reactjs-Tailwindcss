@@ -1,7 +1,10 @@
 import { useState } from "react"
 import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
+
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
@@ -10,13 +13,28 @@ export default function SignIn() {
         password: "",
     });
     const {email, password} = formData;
+    const navigate = useNavigate()
     const onChange = (e) => {
         setFormData((prevState) => ({
          ...prevState,
          [e.target.id] : e.target.value,
         }))
     }
+    const onSubmit = async(e) => {
+        e.preventDefault()
+        try {
+            const auth = getAuth()
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+            if(userCredential.user){
+                navigate("/")
+            }
+            
+        } catch (error) {
+            toast.error("Bad User Credential")
+            
+        }
 
+    }
     return (
 
         <section>
@@ -26,7 +44,7 @@ export default function SignIn() {
                     <img src="https://images.unsplash.com/photo-1607478900766-efe13248b125?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="cake" className="w-full rounded-2xl" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-8 sm:w-[78%]">
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <input className="w-full py-2 px-4 text-xl text-gray-800 rounded-md border-gray-300 transition ease-in-out" 
                         type="email" id="email" 
                         value={email} 
