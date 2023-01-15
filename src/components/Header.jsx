@@ -1,8 +1,21 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 export default function Header() {
   const navigate = useNavigate();
+  // useLoaction untuk mengetahui lokasi path saat ini
   const location = useLocation();
+  const auth = getAuth();
+  const [pageState, setPageState] = useState("Sign In");
+  // menggunakan useEffect untuk mentrigger auth(user sudah login atau belum) stiap refresh page
+  useEffect(() => {
+    // onAuthStateChanged method untuk mengecek stiap kali auth berubah, jika true maka page header akan update menjadi profile
+    onAuthStateChanged(auth, (user) => {
+      return user ? setPageState("Profile") : setPageState("Sign In");
+    });
+  }, [auth]);
+  // cek apakah path saat ini sama dengan location.pathname/lokasi path saat ini jika sama akan set ke true
   const pathMatchRouter = (route) => {
     if (route === location.pathname) {
       return true;
@@ -39,11 +52,13 @@ export default function Header() {
             </li>
             <li
               className={`cursor-pointer py-3 border-b-[3px] text-sm font-semibold text-gray-400  border-b-transparent ${
-                pathMatchRouter("/sign-in") && "border-b-orange-500 text-black"
+                (pathMatchRouter("/sign-in") || pathMatchRouter("/profile")) &&
+                "border-b-orange-500 text-black"
               }`}
-              onClick={() => navigate("/sign-in")}
+              // karena profile path telah dimasukan pada private route maka ketika users blm login/auth -> secara default akan masuk ke path sign-in, dan menggunakan page dynamic untuk perubahan page menggunakan hook pageState
+              onClick={() => navigate("/profile")}
             >
-              Sign in
+              {pageState}
             </li>
           </ul>
         </div>
