@@ -10,15 +10,17 @@ export default function OAuth() {
   async function onGoogleClick() {
     try {
       const auth = getAuth();
+      // inisialisasi objek GoogleAuthProvider dari firebase untuk sign in dengan akun google untuk mendapatan (ID token)
       const provider = new GoogleAuthProvider();
+      // method signWithPopup digunakan unutk users sign popup dari google
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // check user uid (for add to database)
-
+      // check user uid (for add to database) dengan menggunakan doc/document pada firestore
+      // mengambil data uid dari firestore users 
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
-
+        // cek jika user blum login/ada dalam database maka akan di tambahkan dengan var nama, email, dan waktu login
       if (!docSnap.exists()) {
         await setDoc(docRef, {
           name: user.displayName,

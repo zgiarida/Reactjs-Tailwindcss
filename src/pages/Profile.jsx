@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { Link } from "react-router-dom";
+import { FcHome } from "react-icons/fc";
 
 export default function Profile() {
   // inisial method getAuth dari firebase untuk mengecek autentikasi apakah user telah login
@@ -60,7 +62,9 @@ export default function Profile() {
           <form>
             {/* form nama */}
             <input
-              className={`w-full px-4 py-2 text-xl text-gray-400 border-gray-400 bg-white rounded-md transition ease-in-out ${changeDetails && "bg-orange-200 focus:bg-orange-200 text-black"}`}
+              className={`w-full px-4 py-2 text-xl text-gray-400 border-gray-400 bg-white rounded-md transition ease-in-out ${
+                changeDetails && "bg-orange-200 focus:bg-orange-200 text-black"
+              }`}
               type="text"
               // value berisi nama dari formData sesuai user saat ini
               value={name}
@@ -90,8 +94,7 @@ export default function Profile() {
                   className="text-blue-800 font-semibold hover:text-blue-400 cursor-pointer transition ease-in-out duration-200"
                 >
                   {changeDetails ? " Apply change" : " Edit"}
-                  
-                </span> 
+                </span>
               </p>
               <p
                 onClick={logOut}
@@ -101,6 +104,18 @@ export default function Profile() {
               </p>
             </div>
           </form>
+          <button
+            type="submit"
+            className="mt-8 bg-purple-500 w-full border text-white font-semibold py-3 rounded-md hover:bg-purple-600 shadow-md hover:shadow-lg border-b-4 border-purple-700 transition duration-150 ease-in-out "
+          >
+            <Link
+              to="/create-listing"
+              className="flex justify-center items-center"
+            >
+              <FcHome className="text-2xl bg-white rounded-full mr-2" />
+              RENT OR SEEL YOUR HOME
+            </Link>
+          </button>
         </div>
       </section>
     </>
